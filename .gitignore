@@ -1,0 +1,82 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+*.pyc
+
+# ---- Virtual Environments ----
+venv/
+env/
+.venv/
+ENV/
+
+# ---- FastAPI / Uvicorn / Logs ----
+*.log
+*.pid
+*.sqlite3
+instance/
+db.sqlite3
+*.db
+
+# ---- VSCode / IDE ----
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# ---- OS Files ----
+.DS_Store
+Thumbs.db
+
+# ---- Python Packaging ----
+build/
+dist/
+*.egg-info/
+.eggs/
+MANIFEST
+
+# ---- PyInstaller ----
+*.manifest
+*.spec
+
+# ---- Unit test / coverage reports ----
+htmlcov/
+.tox/
+.nox/
+.coverage
+coverage.xml
+*.cover
+*.py,cover
+.cache
+.pytest_cache/
+nosetests.xml
+test-results.xml
+
+# ---- mypy / type checking ----
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# ---- Environments / dotenv ----
+.env
+.env.*
+!env.example
+
+# ---- Jupyter Notebooks ----
+.ipynb_checkpoints
+
+# ---- Local configuration ----
+config.local.json
+settings.local.py
+
+# ---- FastAPI specific ----
+# (if using Alembic for migrations)
+alembic/versions/*.pyc
+alembic/__pycache__/
+
+# ---- Docker ----
+*.dockerfile
+docker-compose.override.yml
+.dockerignore
