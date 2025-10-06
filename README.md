@@ -37,4 +37,4 @@ A modular collection of lightweight APIs designed to simplify and accelerate web
     ```bash
     uvicorn application.main:app --reload --host 0.0.0.0
     ```
-- You can open the app in the browser with URL **<your_machine_ip_address:8000>**
+- You can look for the APIs in the browser with URL **<your_ip_address>:8000/docs**
