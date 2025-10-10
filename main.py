@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-# from api.router import router
+from api.router import router
 from core.config import settings
 from core.middleware import add_cors_middleware
 
@@ -15,4 +15,4 @@ app = FastAPI(
 
 add_cors_middleware(app)
 
-# app.include_router(router, prefix="/api/v1")
+app.include_router(router)
