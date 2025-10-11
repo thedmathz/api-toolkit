@@ -8,10 +8,11 @@ router = APIRouter()
 '''
 Expected JSON:
 {
-    "has_decimal"   : 0,  # 0 for int, 1 for float
     "type"          : 1,  # 1=annually, 2=monthly, 3=weekly
+    "last_date"     : "2023-03-01",
     "dataset"       : [N, N, N, N, ...],
     "steps"         : 3  # optional, default 5
+    "has_decimal"   : 0,  # 0 for int, 1 for float
 }
 
 Example JSON body:
