@@ -6,6 +6,9 @@ class Settings(BaseSettings):
     PROJECT_VERSION: str
 
     ENVIRONMENT: str = 'production'
+    
+    SMS_API_KEY: str
+    SMS_SEMAPHORE_API_KEY: str
 
     class Config:
         env_file = ".env"
