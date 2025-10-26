@@ -31,7 +31,7 @@ async def index(payload: MessageRequest):
     # has no message
     if not payload.message:
         raise HTTPException(status_code=401, detail="Invalid SMS message")
-
+ 
     # has no message
     if not payload.number:
         raise HTTPException(status_code=401, detail="Invalid receiver number")
