@@ -62,9 +62,9 @@ async def forecast(request: Request):
             last_date = pd.to_datetime(last_date)
             dates = pd.date_range(end=last_date, periods=len(dataset), freq=freq)
         else:
-            # fallback to fixed start date
-            start_date = '2023-01-01'
-            dates = pd.date_range(start=start_date, periods=len(dataset), freq=freq)
+            # use today as the last date
+            last_date = pd.to_datetime(datetime.today().strftime("%Y-%m-%d"))
+            dates = pd.date_range(end=last_date, periods=len(dataset), freq=freq)
 
         df = pd.DataFrame({"ds": dates, "y": dataset})
 
