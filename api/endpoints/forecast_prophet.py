@@ -1,3 +1,4 @@
+import datetime
 import pandas as pd
 from prophet import Prophet
 from fastapi import APIRouter, Request, HTTPException
@@ -33,10 +34,10 @@ async def forecast(request: Request):
         if "type" not in data or "dataset" not in data:
             raise HTTPException(status_code=400, detail="'type' and 'dataset' are required")
         
-        ts_type = data["type"]
-        dataset = data["dataset"]
-        steps = data.get("steps", 5)
-        last_date = data.get("last_date")  # optional
+        ts_type     = data["type"]
+        dataset     = data["dataset"]
+        steps       = data.get("steps", 5)
+        last_date   = data.get("last_date")  # optional
 
         if not isinstance(dataset, list) or len(dataset) == 0:
             raise HTTPException(status_code=400, detail="'dataset' must be a non-empty list")
@@ -63,7 +64,7 @@ async def forecast(request: Request):
             dates = pd.date_range(end=last_date, periods=len(dataset), freq=freq)
         else:
             # use today as the last date
-            last_date = pd.to_datetime(datetime.today().strftime("%Y-%m-%d"))
+            last_date = pd.to_datetime(datetime.datetime.today().strftime("%Y-%m-%d"))
             dates = pd.date_range(end=last_date, periods=len(dataset), freq=freq)
 
         df = pd.DataFrame({"ds": dates, "y": dataset})
@@ -72,8 +73,8 @@ async def forecast(request: Request):
         model = Prophet(yearly_seasonality=yearly_seasonality,
                         weekly_seasonality=weekly_seasonality,
                         daily_seasonality=False)
-        if ts_type == 2:
-            model.add_seasonality(name="monthly", period=30.5, fourier_order=5)
+        
+        if ts_type == 2: model.add_seasonality(name="monthly", period=30.5, fourier_order=5)
         model.fit(df)
 
         # Forecast future
