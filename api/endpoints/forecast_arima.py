@@ -20,12 +20,12 @@ Expected JSON:
 
 Example JSON body:
 {
-    "year"          : 2024,
+    "year"          : 2023,
     "has_decimal"   : 0,
     "dataset"       : {
         "2021": [100, 120, 150, 180, 200, 300, 250, 220, 180, 150, 200, 350],
         "2022": [110, 130, 160, 190, 210, 320, 270, 230, 190, 160, 210, 370],
-        "2023": [120, 140, 170, 200, 220, 350, 280, 240, 200, 170, 220, 400]
+        "2023": [120, 140, 170, 200, 220, 350, 280, 240, 200, 170]
     }
 }
 '''
@@ -33,11 +33,11 @@ Example JSON body:
 @router.post("/")
 async def forecast(request: Request):
     try:
-        data = await request.json()
-        year = str(data.get("year", ""))
+        data        = await request.json()
+        year        = str(data.get("year", ""))
         has_decimal = data.get("has_decimal", 0)
-        dataset = data.get("dataset", {})
-        steps = int(data.get("steps", 12))
+        dataset     = data.get("dataset", {})
+        steps       = int(data.get("steps", 12))
 
         if not dataset:
             raise HTTPException(status_code=400, detail="Dataset is missing or empty")
@@ -136,79 +136,91 @@ async def forecast(request: Request):
 '''
 Example Output:
 {
-    "forecast_year": 2024,
+    "forecast_year": 2023,
     "forecast_result": [
         {
             "month": 1,
-            "forecast": 126,
-            "lower95CI": 113,
-            "upper95CI": 138
+            "forecast": 120,
+            "lower95CI": 120,
+            "upper95CI": 120,
+            "is_forecast": false
         },
         {
             "month": 2,
-            "forecast": 155,
-            "lower95CI": 141,
-            "upper95CI": 168
+            "forecast": 140,
+            "lower95CI": 140,
+            "upper95CI": 140,
+            "is_forecast": false
         },
         {
             "month": 3,
-            "forecast": 181,
-            "lower95CI": 167,
-            "upper95CI": 194
+            "forecast": 170,
+            "lower95CI": 170,
+            "upper95CI": 170,
+            "is_forecast": false
         },
         {
             "month": 4,
-            "forecast": 212,
-            "lower95CI": 199,
-            "upper95CI": 226
+            "forecast": 200,
+            "lower95CI": 200,
+            "upper95CI": 200,
+            "is_forecast": false
         },
         {
             "month": 5,
-            "forecast": 232,
-            "lower95CI": 218,
-            "upper95CI": 245
+            "forecast": 220,
+            "lower95CI": 220,
+            "upper95CI": 220,
+            "is_forecast": false
         },
         {
             "month": 6,
-            "forecast": 372,
-            "lower95CI": 359,
-            "upper95CI": 385
+            "forecast": 350,
+            "lower95CI": 350,
+            "upper95CI": 350,
+            "is_forecast": false
         },
         {
             "month": 7,
-            "forecast": 288,
-            "lower95CI": 275,
-            "upper95CI": 302
+            "forecast": 280,
+            "lower95CI": 280,
+            "upper95CI": 280,
+            "is_forecast": false
         },
         {
             "month": 8,
-            "forecast": 252,
-            "lower95CI": 238,
-            "upper95CI": 265
+            "forecast": 240,
+            "lower95CI": 240,
+            "upper95CI": 240,
+            "is_forecast": false
         },
         {
             "month": 9,
-            "forecast": 212,
-            "lower95CI": 198,
-            "upper95CI": 225
+            "forecast": 200,
+            "lower95CI": 200,
+            "upper95CI": 200,
+            "is_forecast": false
         },
         {
             "month": 10,
-            "forecast": 182,
-            "lower95CI": 168,
-            "upper95CI": 195
+            "forecast": 170,
+            "lower95CI": 170,
+            "upper95CI": 170,
+            "is_forecast": false
         },
         {
             "month": 11,
-            "forecast": 232,
-            "lower95CI": 218,
-            "upper95CI": 245
+            "forecast": 222,
+            "lower95CI": 211,
+            "upper95CI": 232,
+            "is_forecast": true
         },
         {
             "month": 12,
-            "forecast": 422,
-            "lower95CI": 408,
-            "upper95CI": 435
+            "forecast": 386,
+            "lower95CI": 375,
+            "upper95CI": 397,
+            "is_forecast": true
         }
     ]
 }
