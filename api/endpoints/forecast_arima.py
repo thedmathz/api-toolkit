@@ -71,18 +71,18 @@ async def forecast(request: Request):
         upper_ci = []
 
         if months_to_forecast:
-            # # Fit SARIMA model
-            # model = SARIMAX(
-            #     df['Bookings'],
-            #     order=(1, 1, 1),
-            #     seasonal_order=(1, 1, 1, 12),
-            #     enforce_stationarity=False,
-            #     enforce_invertibility=False
-            # )
-            # model_fit = model.fit(disp=False)
+            # Fit SARIMA model
+            model = SARIMAX(
+                df['Bookings'],
+                order=(1, 1, 1),
+                seasonal_order=(1, 1, 1, 12),
+                enforce_stationarity=False,
+                enforce_invertibility=False
+            )
+            model_fit = model.fit(disp=False)
             
-            model = ARIMA(df['Bookings'], order=(1, 1, 1))
-            model_fit = model.fit()
+            # model = ARIMA(df['Bookings'], order=(1, 1, 1))
+            # model_fit = model.fit()
 
             # Forecast missing months
             forecast_result = model_fit.get_forecast(steps=len(months_to_forecast))
