@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Request, HTTPException
 from fastapi.responses import JSONResponse
 from statsmodels.tsa.statespace.sarimax import SARIMAX
+from statsmodels.tsa.arima.model import ARIMA
 import pandas as pd
 
 router = APIRouter()
@@ -32,6 +33,7 @@ Example JSON body:
 @router.post("/")
 async def forecast(request: Request):
     try:
+        
         data        = await request.json()
         year        = str(data.get("year", ""))
         has_decimal = data.get("has_decimal", 0)
@@ -69,15 +71,18 @@ async def forecast(request: Request):
         upper_ci = []
 
         if months_to_forecast:
-            # Fit SARIMA model
-            model = SARIMAX(
-                df['Bookings'],
-                order=(1, 1, 1),
-                seasonal_order=(1, 1, 1, 12),
-                enforce_stationarity=False,
-                enforce_invertibility=False
-            )
-            model_fit = model.fit(disp=False)
+            # # Fit SARIMA model
+            # model = SARIMAX(
+            #     df['Bookings'],
+            #     order=(1, 1, 1),
+            #     seasonal_order=(1, 1, 1, 12),
+            #     enforce_stationarity=False,
+            #     enforce_invertibility=False
+            # )
+            # model_fit = model.fit(disp=False)
+            
+            model = ARIMA(df['Bookings'], order=(1, 1, 1))
+            model_fit = model.fit()
 
             # Forecast missing months
             forecast_result = model_fit.get_forecast(steps=len(months_to_forecast))
