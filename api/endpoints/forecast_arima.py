@@ -14,8 +14,7 @@ Expected JSON:
         "2021": [100, 120, 320, 123, 100, ...],
         "2022": [...],
         "2023": [...]
-    },
-    "steps"         : 12  # optional, default 12 months
+    }
 }
 
 Example JSON body:
